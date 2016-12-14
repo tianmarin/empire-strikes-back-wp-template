@@ -1,0 +1,13 @@
+body.login {
+	background: #FFF;
+}
+.login h1 a {
+background-image: url('../login/novis.png');
+background-size: 300px 72px;
+width: 300px;
+height: 72px;
+}
+
+#login {
+padding: 30px 0 0;
+}
