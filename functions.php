@@ -1,5 +1,8 @@
 <?php
 
+
+
+add_theme_support( 'post-thumbnails' );
 /* http://www.wpbeginner.com/plugins/add-excerpts-to-your-pages-in-wordpress/*/
 add_action( 'init', 'my_add_excerpts_to_pages' );
 function my_add_excerpts_to_pages() {

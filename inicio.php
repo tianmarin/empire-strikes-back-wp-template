@@ -2,8 +2,22 @@
 /*
 * Template Name: HomePage
 */
-get_header(); ?>
-<div class="jumbotron">
+get_header();
+?>
+<?php if ( have_posts() ) : ?>
+<?php /* Start the Loop */ ?>
+<?php while ( have_posts() ) : the_post(); ?>
+
+<?php
+	$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );
+	$jumbotron_style='background: url('.$thumb['0'].') no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;'
+	
+?>
+<div class="jumbotron" style="<?php echo $jumbotron_style;?>">
 	<div class="container">
 		<h1>¡Bienvenido!</h1>
 		<p>La intranet de <strong><?php echo bloginfo( 'name' ) ?></strong> ha sido redise&ntilde;ada para una mejor experiencia.</p>
@@ -68,5 +82,9 @@ get_header(); ?>
 
 	?>
 </article><!-- FIN #inicio -->
+<?php endwhile;?>
+<?php else:?>
+	Esta p&aacute;gina no existe
+<?php endif;?>
 
 <?php get_footer(); ?>

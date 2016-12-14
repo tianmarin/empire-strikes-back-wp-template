@@ -6976,6 +6976,9 @@ body#tinymce h6 > a:visited {
   border-color: #ddd;
   border-color: rgba(0, 0, 0, 0.15);
 }
+.jumbotron {
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+}
 /* Sites
 ---------------------------------------------------------------------------------------------------- */
 #sites {
