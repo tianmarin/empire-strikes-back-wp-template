@@ -1,8 +1,6 @@
 <?php
-
-
-
 add_theme_support( 'post-thumbnails' );
+
 /* http://www.wpbeginner.com/plugins/add-excerpts-to-your-pages-in-wordpress/*/
 add_action( 'init', 'my_add_excerpts_to_pages' );
 function my_add_excerpts_to_pages() {
@@ -18,17 +16,9 @@ add_action( 'admin_init', 'my_theme_add_editor_styles' );
 set_user_setting( 'dfw_width', 1200 );
 
 
-/*http://wordpress.org/support/topic/how-can-i-force-https-on-everything*/
-/*
-function my_force_ssl() {
-    return true;
-}
-add_filter('force_ssl', 'my_force_ssl', 10, 3);
-*/
-
 //http://codex.wordpress.org/Function_Reference/remove_menu_page
 function remove_menus(){
-	remove_menu_page( 'upload.php' );                 //Media  
+//	remove_menu_page( 'upload.php' );                 //Media  
     remove_menu_page('edit.php');                     //Posts  
 }
 add_action( 'admin_menu', 'remove_menus' );
@@ -41,6 +31,7 @@ function get_page_parents_list($post=''){
 	if($post->post_parent){
 		//collect ancestor pages
 		$relations = get_post_ancestors($post->ID);
+		$relations=array_reverse($relations);
 		//add current post to pages
 		array_push($relations, $post->ID);
 		//get comma delimited list of children and parents and self
@@ -148,6 +139,79 @@ add_action('login_head', 'custom_login_css');
 
 
 
+
+
+// init process for registering our button
+add_action('admin_init', 'esb_subpages_shortcode_button_init');
+function esb_subpages_shortcode_button_init() {
+	//Abort early if the user will never see TinyMCE
+	if ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') && get_user_option('rich_editing') == 'true')
+	return;
+	
+	//Add a callback to regiser our tinymce plugin   
+	add_filter("mce_external_plugins", "esb_subpages_register_tinymce_plugin"); 
+	
+	// Add a callback to add our button to the TinyMCE toolbar
+	add_filter('mce_buttons', 'esb_subpages_add_tinymce_button');
+}
+
+
+//This callback registers our plug-in
+function esb_subpages_register_tinymce_plugin($plugin_array) {
+	$plugin_array['esb_subpages_button'] = get_stylesheet_directory_uri().'/js/shortcode_btn.js';
+	return $plugin_array;
+}
+
+//This callback adds our button to the toolbar
+function esb_subpages_add_tinymce_button($buttons) {
+	//Add the button ID to the $button array
+	$buttons[] = "esb_subpages_button";
+	return $buttons;
+}
+
+
+
+
+add_shortcode( "subpages", 'esb_subpages_shortcode' );
+function esb_subpages_shortcode($atts){
+	$id = get_the_ID();
+	$page=get_post($id);
+	$output='';
+	$output .='<section class="row row-eq-height">';
+	$output .='<span class="h3">';
+	$output .="Subp&aacute;ginas de ".$page->post_title;
+	$output .='</span>';
+	$output .='<div class="list-group">';
+	$subargs = array(
+		'sort_order'	=> 'ASC',
+		'sort_column'	=> 'menu_order',
+		'hierarchical'	=> 1,
+		'exclude'		=> '',
+		'include'		=> '',
+		'meta_key'		=> '',
+		'meta_value'	=> '',
+		'authors'		=> '',
+		'child_of'		=> 0,
+		'parent'		=> $page->ID,
+		'exclude_tree'	=> '',
+		'number'		=> '',
+		'offset'		=> 0,
+		'post_type'		=> 'page',
+		'post_status'	=> 'publish'
+		); 
+		$subpages = get_pages($subargs);
+		
+		foreach($subpages as $subpage):
+			$output .='<a class="list-group-item" href="'.get_page_link($subpage->ID).'">';
+			$output .='<span class="h5 list-group-item-heading">'.$subpage->post_title.'</span>';
+			$output .='<p class="list-group-item-text">'.$subpage->post_excerpt.'</p>';
+			$output .='</a>';
+		endforeach;
+	$output .='</div>';
+	$output .='</section>';
+	return $output;
+
+}
 
 
 

@@ -9,12 +9,17 @@ get_header();
 <?php while ( have_posts() ) : the_post(); ?>
 
 <?php
-	$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );
-	$jumbotron_style='background: url('.$thumb['0'].') no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;'
+	if(has_post_thumbnail($post->ID)){
+		$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );
+		$jumbotron_style='background: url('.$thumb['0'].') no-repeat center center fixed; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background-attachment: scroll;';
+	}else{
+		$jumbotron_style='';
+	}
 	
 ?>
 <div class="jumbotron" style="<?php echo $jumbotron_style;?>">
@@ -26,11 +31,12 @@ get_header();
 </div>
 <article id="inicio" class="container">
 	<?php
+	$output='';
 	$args = array(
 		'sort_order'	=> 'ASC',
 		'sort_column'	=> 'menu_order',
 		'hierarchical'	=> 1,
-		'exclude'		=> '',
+		'exclude'		=> $post->ID,
 		'include'		=> '',
 		'meta_key'		=> '',
 		'meta_value'	=> '',
@@ -45,7 +51,7 @@ get_header();
 		); 
 		$pages = get_pages($args);
 		foreach($pages as $page):
-			$output .='<section>';
+			$output .='<section class="row row-eq-height">';
 			$output .='<h1>';
 			$output .=$page->post_title;
 			$output .='</h1>';
