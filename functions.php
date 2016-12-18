@@ -138,6 +138,16 @@ function custom_login_css() {
 add_action('login_head', 'custom_login_css');
 
 
+add_shortcode( 'duplicar', 'replicate_page' );
+
+function replicate_page($atts,$url="") {
+	$pageid = url_to_postid($url);
+//	$page = get_page_by_path($path);
+	$page = get_page($pageid);
+	$content = apply_filters('the_content', $page->post_content);
+	return $content;
+}
+
 
 
 

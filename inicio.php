@@ -76,10 +76,28 @@ get_header();
 				$subpages = get_pages($subargs);
 				
 				foreach($subpages as $subpage):
-					$output .='<a class="col-xs-12 col-sm-6 col-md-4 col-lg-3 list-group-item" href="'.get_page_link($subpage->ID).'">';
-					$output .='<h4 class="list-group-item-heading">'.$subpage->post_title.'</h4>';
-					$output .='<p class="list-group-item-text">'.$subpage->post_excerpt.'</p>';
-					$output .='</a>';
+				
+					$output .='<div class="col-sm-6 col-md-4">';
+						$output .='<div class="thumbnail">';
+							if(has_post_thumbnail($subpage->ID)){
+								$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($subpage->ID), 'full' );
+								$output .= '<a href="'.get_page_link($subpage->ID).'" >';
+									$output .='<img src="'.$thumb['0'].'" alt="'.$subpage->post_title.'">';
+								$output .= '</a>';
+								
+							}
+							$output .='<div class="caption">';
+								$output .='<h3>'.$subpage->post_title.'</h3>';
+								$output .='<p>'.$subpage->post_excerpt.'</p>';
+								$output .='<p><a href="'.get_page_link($subpage->ID).'" class="btn btn-danger" role="button">Entrar</a></p>';
+							$output .='</div>';
+						$output .='</div>';
+					$output .='</div>';
+
+//					$output .='<a class="col-xs-12 col-sm-6 col-md-4 col-lg-3 list-group-item" href="'.get_page_link($subpage->ID).'">';
+//					$output .='<h4 class="list-group-item-heading">'.$subpage->post_title.'</h4>';
+//					$output .='<p class="list-group-item-text">'.$subpage->post_excerpt.'</p>';
+//					$output .='</a>';
 				endforeach;
 			$output .='</div>';
 			$output .='</section>';
