@@ -187,7 +187,7 @@ function esb_subpages_shortcode($atts){
 	$id = get_the_ID();
 	$page=get_post($id);
 	$output='';
-	$output .='<section class="row row-eq-height">';
+	$output .='<section class="row well">';
 	$output .='<span class="h3">';
 	$output .="Subp&aacute;ginas de ".$page->post_title;
 	$output .='</span>';
