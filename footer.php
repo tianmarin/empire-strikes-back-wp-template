@@ -38,7 +38,7 @@
 					<h2 class="text-center">Intranet</h2>
 				</header>
 				<div class="list-group">
-					<a class="list-group-item" href="#" target="_blank">Gu&iacute;a de Estilos y Documentaci&oacute;n</a>
+					<a class="list-group-item" href="http://intranetmx.noviscorp.com/novis/mc/documentation-mgmt/intranet/" target="_blank">Gu&iacute;a de Estilos y Documentaci&oacute;n</a>
 					<a class="list-group-item" href="#" target="_blank">Mapa del Sitio</a>
 				</div>
 			</section>

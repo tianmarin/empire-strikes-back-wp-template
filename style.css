@@ -6929,6 +6929,7 @@ body#tinymce h6 > a:visited {
 ---------------------------------------------------------------------------------------------------- */
 #main-footer {
   background: url(img/footer.jpg) no-repeat center center fixed;
+  background-attachment: scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -6975,6 +6976,9 @@ body#tinymce h6 > a:visited {
 #inicio blockquote {
   border-color: #ddd;
   border-color: rgba(0, 0, 0, 0.15);
+}
+.jumbotron {
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
 }
 /* Sites
 ---------------------------------------------------------------------------------------------------- */
@@ -7155,61 +7159,274 @@ body#tinymce h6 > a:visited {
 }
 /* MULTIPAGE-TOC
 -------------------------------------------------- */
-.multipage-toc {
-  background: none !important;
-  border: none !important;
-  list-style: none !important;
-  overflow: hidden;
+.entry-subtitle {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+  margin-bottom: 10px;
+  font-size: 36px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-.multipage-toc li {
-  float: left;
+.entry-subtitle small,
+.entry-subtitle .small {
+  font-weight: normal;
+  line-height: 1;
+  color: #777777;
 }
-.multipage-toc li.current a {
-  background: rgba(78, 168, 0, 0.5) !important;
+.entry-subtitle small,
+.entry-subtitle .small {
+  font-size: 65%;
 }
-.multipage-toc li.current a:after {
-  border-left-color: rgba(78, 168, 0, 0.5) !important;
-}
-.multipage-toc li a {
-  text-decoration: none;
-  padding: 10px 0 10px 30px !important;
-  background: #4f9f09;
+div.multipage {
+  overflow-x: auto;
+  min-height: 0.01%;
+  width: 100%;
+  max-width: 100%;
+  overflow: scroll;
   position: relative;
-  display: block;
-  float: left;
-  color: white !important;
-  margin: none !important;
 }
-.multipage-toc li a:hover {
-  margin-top: 0 !important;
-  padding: 10px 0 10px 75px !important;
+@media screen and (max-width: 767px) {
+  div.multipage {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #dddddd;
+  }
+  div.multipage > .table {
+    margin-bottom: 0;
+  }
+  div.multipage > .table > thead > tr > th,
+  div.multipage > .table > tbody > tr > th,
+  div.multipage > .table > tfoot > tr > th,
+  div.multipage > .table > thead > tr > td,
+  div.multipage > .table > tbody > tr > td,
+  div.multipage > .table > tfoot > tr > td {
+    white-space: nowrap;
+  }
+  div.multipage > .table-bordered {
+    border: 0;
+  }
+  div.multipage > .table-bordered > thead > tr > th:first-child,
+  div.multipage > .table-bordered > tbody > tr > th:first-child,
+  div.multipage > .table-bordered > tfoot > tr > th:first-child,
+  div.multipage > .table-bordered > thead > tr > td:first-child,
+  div.multipage > .table-bordered > tbody > tr > td:first-child,
+  div.multipage > .table-bordered > tfoot > tr > td:first-child {
+    border-left: 0;
+  }
+  div.multipage > .table-bordered > thead > tr > th:last-child,
+  div.multipage > .table-bordered > tbody > tr > th:last-child,
+  div.multipage > .table-bordered > tfoot > tr > th:last-child,
+  div.multipage > .table-bordered > thead > tr > td:last-child,
+  div.multipage > .table-bordered > tbody > tr > td:last-child,
+  div.multipage > .table-bordered > tfoot > tr > td:last-child {
+    border-right: 0;
+  }
+  div.multipage > .table-bordered > tbody > tr:last-child > th,
+  div.multipage > .table-bordered > tfoot > tr:last-child > th,
+  div.multipage > .table-bordered > tbody > tr:last-child > td,
+  div.multipage > .table-bordered > tfoot > tr:last-child > td {
+    border-bottom: 0;
+  }
 }
-.multipage-toc li a:after {
-  content: " ";
-  display: block;
-  width: 0;
-  height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 15px solid #4f9f09;
+div.multipage ul.multipage-toc {
+  display: table-row;
+}
+div.multipage ul.multipage-toc:before {
+  bottom: 20px;
   position: absolute;
-  top: 50%;
-  margin-top: -20px;
-  left: 100%;
-  z-index: 2;
-}
-.multipage-toc li a:before {
   content: " ";
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  z-order: 0;
+}
+div.multipage ul.multipage-toc li {
+  display: table-cell;
+  text-align: center;
+  position: relative;
+}
+div.multipage ul.multipage-toc li span.numbers {
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.4;
+  margin: auto;
   display: block;
-  width: 0;
-  height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 15px solid white;
-  position: absolute;
-  top: 50%;
-  margin-top: -20px;
-  margin-left: 10px;
-  left: 100%;
-  z-index: 1;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  div.multipage ul.multipage-toc li span.numbers {
+    font-size: 21px;
+  }
+}
+div.multipage ul.multipage-toc li a {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+div.multipage ul.multipage-toc li a:focus,
+div.multipage ul.multipage-toc li a:active:focus,
+div.multipage ul.multipage-toc li a.active:focus,
+div.multipage ul.multipage-toc li a.focus,
+div.multipage ul.multipage-toc li a:active.focus,
+div.multipage ul.multipage-toc li a.active.focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+div.multipage ul.multipage-toc li a:hover,
+div.multipage ul.multipage-toc li a:focus,
+div.multipage ul.multipage-toc li a.focus {
+  color: #333333;
+  text-decoration: none;
+}
+div.multipage ul.multipage-toc li a:active,
+div.multipage ul.multipage-toc li a.active {
+  outline: 0;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+div.multipage ul.multipage-toc li a.disabled,
+div.multipage ul.multipage-toc li a[disabled],
+fieldset[disabled] div.multipage ul.multipage-toc li a {
+  cursor: not-allowed;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+adiv.multipage ul.multipage-toc li a.disabled,
+fieldset[disabled] adiv.multipage ul.multipage-toc li a {
+  pointer-events: none;
+}
+div.multipage ul.multipage-toc li a:focus,
+div.multipage ul.multipage-toc li a.focus {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #8c8c8c;
+}
+div.multipage ul.multipage-toc li a:hover {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+div.multipage ul.multipage-toc li a:active,
+div.multipage ul.multipage-toc li a.active,
+.open > .dropdown-togglediv.multipage ul.multipage-toc li a {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+div.multipage ul.multipage-toc li a:active:hover,
+div.multipage ul.multipage-toc li a.active:hover,
+.open > .dropdown-togglediv.multipage ul.multipage-toc li a:hover,
+div.multipage ul.multipage-toc li a:active:focus,
+div.multipage ul.multipage-toc li a.active:focus,
+.open > .dropdown-togglediv.multipage ul.multipage-toc li a:focus,
+div.multipage ul.multipage-toc li a:active.focus,
+div.multipage ul.multipage-toc li a.active.focus,
+.open > .dropdown-togglediv.multipage ul.multipage-toc li a.focus {
+  color: #333333;
+  background-color: #d4d4d4;
+  border-color: #8c8c8c;
+}
+div.multipage ul.multipage-toc li a:active,
+div.multipage ul.multipage-toc li a.active,
+.open > .dropdown-togglediv.multipage ul.multipage-toc li a {
+  background-image: none;
+}
+div.multipage ul.multipage-toc li a.disabled:hover,
+div.multipage ul.multipage-toc li a[disabled]:hover,
+fieldset[disabled] div.multipage ul.multipage-toc li a:hover,
+div.multipage ul.multipage-toc li a.disabled:focus,
+div.multipage ul.multipage-toc li a[disabled]:focus,
+fieldset[disabled] div.multipage ul.multipage-toc li a:focus,
+div.multipage ul.multipage-toc li a.disabled.focus,
+div.multipage ul.multipage-toc li a[disabled].focus,
+fieldset[disabled] div.multipage ul.multipage-toc li a.focus {
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+div.multipage ul.multipage-toc li a .badge {
+  color: #ffffff;
+  background-color: #333333;
+}
+div.multipage ul.multipage-toc li.current a {
+  color: #ffffff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+div.multipage ul.multipage-toc li.current a:focus,
+div.multipage ul.multipage-toc li.current a.focus {
+  color: #ffffff;
+  background-color: #286090;
+  border-color: #122b40;
+}
+div.multipage ul.multipage-toc li.current a:hover {
+  color: #ffffff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+div.multipage ul.multipage-toc li.current a:active,
+div.multipage ul.multipage-toc li.current a.active,
+.open > .dropdown-togglediv.multipage ul.multipage-toc li.current a {
+  color: #ffffff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+div.multipage ul.multipage-toc li.current a:active:hover,
+div.multipage ul.multipage-toc li.current a.active:hover,
+.open > .dropdown-togglediv.multipage ul.multipage-toc li.current a:hover,
+div.multipage ul.multipage-toc li.current a:active:focus,
+div.multipage ul.multipage-toc li.current a.active:focus,
+.open > .dropdown-togglediv.multipage ul.multipage-toc li.current a:focus,
+div.multipage ul.multipage-toc li.current a:active.focus,
+div.multipage ul.multipage-toc li.current a.active.focus,
+.open > .dropdown-togglediv.multipage ul.multipage-toc li.current a.focus {
+  color: #ffffff;
+  background-color: #204d74;
+  border-color: #122b40;
+}
+div.multipage ul.multipage-toc li.current a:active,
+div.multipage ul.multipage-toc li.current a.active,
+.open > .dropdown-togglediv.multipage ul.multipage-toc li.current a {
+  background-image: none;
+}
+div.multipage ul.multipage-toc li.current a.disabled:hover,
+div.multipage ul.multipage-toc li.current a[disabled]:hover,
+fieldset[disabled] div.multipage ul.multipage-toc li.current a:hover,
+div.multipage ul.multipage-toc li.current a.disabled:focus,
+div.multipage ul.multipage-toc li.current a[disabled]:focus,
+fieldset[disabled] div.multipage ul.multipage-toc li.current a:focus,
+div.multipage ul.multipage-toc li.current a.disabled.focus,
+div.multipage ul.multipage-toc li.current a[disabled].focus,
+fieldset[disabled] div.multipage ul.multipage-toc li.current a.focus {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+div.multipage ul.multipage-toc li.current a .badge {
+  color: #337ab7;
+  background-color: #ffffff;
 }
