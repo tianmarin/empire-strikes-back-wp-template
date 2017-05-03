@@ -39,6 +39,27 @@
 			echo " | $site_description";
 		?>
 	</title>
+<?php
+	function address_mobile_address_bar() {
+		$color = "#C21515";
+		//this is for Chrome, Firefox OS, Opera and Vivaldi
+		echo '<meta name="theme-color" content="'.$color.'">';
+		//Windows Phone **
+		echo '<meta name="msapplication-navbutton-color" content="'.$color.'">';
+		// iOS Safari
+		echo '<meta name="apple-mobile-web-app-capable" content="yes">';
+		echo '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">';
+	}
+	?>
+	<meta name="apple-mobile-web-app-title" content="Intranet <?php _e($site_description);?>">
+	<?php add_action( 'wp_head', 'address_mobile_address_bar' ); ?>
+	<link rel="shortcut icon" href="<?php _e(get_template_directory_uri());?>/icon/app-icon@16x16.png">
+	<link rel="apple-touch-icon" href="<?php _e(get_template_directory_uri());?>/icon/app-icon@180x180.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="<?php _e(get_template_directory_uri());?>/icon/app-icon@152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php _e(get_template_directory_uri());?>/icon/app-icon@180x180.png">
+	<link rel="apple-touch-icon" sizes="167x167" href="<?php _e(get_template_directory_uri());?>/icon/app-icon@167x167.png">
+	<link rel="icon" sizes="180x180" href="<?php _e(get_template_directory_uri());?>/icon/app-icon@180x180.png">
+	<link rel="icon" sizes="120x120" href="<?php _e(get_template_directory_uri());?>/icon/app-icon@120x120.png">
 	<?php
 	wp_register_script(
 		'bootstrap',
@@ -46,6 +67,15 @@
 		array('jquery',),
 		'3.3.7'
 	);
+	add_action( 'wp_before_admin_bar_render', 'wpse20131211_admin_bar' );
+	
+	function wpse20131211_admin_bar() {
+		global $wp_admin_bar;
+//		$wp_admin_bar->remove_menu('wp-logo');
+		$wp_admin_bar->remove_menu('new-post');
+		$wp_admin_bar->remove_menu('customize');
+		$wp_admin_bar->remove_menu('comments');
+	}
 		
 	wp_enqueue_script("bootstrap");
 	wp_head();

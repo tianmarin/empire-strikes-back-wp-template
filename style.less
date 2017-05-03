@@ -23,6 +23,16 @@ Description: This Theme, has been developed by Cristian Marin. As a hobby.
 //@col_dest_02:		#868686;	/*	Gris			*/
 @col_dest_03:		#376F06;	/*	Verde			*/
 
+a[href="http://www.amcharts.com/javascript-charts/"]{
+	display: none !important;
+}
+a[href="http://bpmn.io"]{
+	display: none !important;
+}
+.bpmn-io{
+	height: 80vh;
+}
+
 
 body {
 //	background: @col_base_01;
@@ -148,13 +158,214 @@ body {
 }
 //this mixin is ued to the tinymce editor
 .page_content_mixin{
+	&>*{
+		.text-justify;
+	}
 	h1, h2, h3, h4, h5, h6{
+//		.text-nowrap;
+//		white-space: nowrap;
 		&>a:link,
 		&>a:active,
 		&>a:visited{
 			color: @col_base_02;
 		}
 	}
+/* Timeline */
+// Color variables (appears count calculates by raw css)
+@color0: #c0c0c0; // Appears 5 times
+@color1: #ffffff; // Appears 3 times
+
+// Width variables (appears count calculates by raw css)
+@width1: 100%; // Appears 2 times
+
+
+.timeline {
+	list-style: none;
+	padding: 20px;
+	position: relative;
+	&:before {
+		background-color: #eeeeee;
+		bottom: 0;
+		content: " ";
+		left: 50%;
+		margin-left: -1.5px;
+		position: absolute;
+		top: 40px;
+		width: 3px;
+	}
+	.timeline-item {
+		margin-bottom: 20px;
+		position: relative;
+		&:before {
+			content: "";
+			display: table;
+		}
+		&:after {
+			clear: both;
+			content: "";
+			display: table;
+		}
+		.timeline-badge {
+			background-color: #7c7c7c;
+			border-bottom-left-radius: 50%;
+			border-bottom-right-radius: 50%;
+			border-top-left-radius: 50%;
+			border-top-right-radius: 50%;
+			border: 3px solid @color1;
+			color: @color1;
+			font-size: 22px;
+			height: 54px;
+			left: 50%;
+			line-height: 52px;
+			margin-left: -25px;
+			position: absolute;
+			text-align: center;
+			top: 18px;
+			width: 54px;
+			z-index: 100;
+			i {
+				left: 0px;
+				top: 2px;
+			}
+			.fa {
+				left: 0px;
+				top: 2px;
+			}
+			.glyphicon {
+				left: 0px;
+				top: 2px;
+			}
+		}
+		.timeline-badge.primary {
+			background-color: #1f9eba;
+		}
+		.timeline-badge.info {
+			background-color: #5bc0de;
+		}
+		.timeline-badge.success {
+			background-color: #59ba1f;
+		}
+		.timeline-badge.warning {
+			background-color: #d1bd10;
+		}
+		.timeline-badge.danger {
+			background-color: #ba1f1f;
+		}
+		.timeline-panel {
+			-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+			background: @color1;
+			border-radius: 2px;
+			border: 1px solid @color0;
+			box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+			float: left;
+			padding: 20px;
+			position: relative;
+			right: 16px;
+			width: 46%;
+			&:before {
+				border-bottom: 16px solid transparent;
+				border-left: 16px solid @color0;
+				border-right: 0 solid @color0;
+				border-top: 16px solid transparent;
+				content: " ";
+				display: inline-block;
+				position: absolute;
+				right: -16px;
+				top: 26px;
+			}
+			.timeline-title {
+				color: inherit;
+				margin-top: 0;
+			}
+			.timeline-body>p {
+				margin-bottom: 0;
+			}
+			.timeline-body>ul {
+				margin-bottom: 0;
+			}
+			.timeline-body>p+p {
+				margin-top: 5px;
+			}
+		}
+		&:last-child {
+			nth-child(even) {
+				float: right;
+			}
+		}
+		&:nth-child(even) {
+			.timeline-panel {
+				float: right;
+				left: 16px;
+				&:before {
+					border-left-width: 0;
+					border-right-width: 14px;
+					left: -14px;
+					right: auto;
+				}
+			}
+		}
+	}
+}
+.timeline-horizontal {
+	display: inline-block;
+	list-style: none;
+	list-style: none;
+	padding: 20px;
+	padding: 20px 0px 20px 0px;
+	position: relative;
+	position: relative;
+	&:before {
+		bottom: 26px;
+		height: 3px;
+		left: 56px;
+		margin-bottom: 20px;
+		right: 0;
+		top: auto;
+		width: @width1;
+	}
+	.timeline-item {
+		display: table-cell;
+		float: none !important;
+		height: 280px;
+		margin: 0 auto;
+		min-width: 320px;
+		padding-left: 0px;
+		padding-right: 20px;
+		vertical-align: bottom;
+		width: 20%;
+		.timeline-panel {
+			bottom: 64px;
+			display: inline-block;
+			float: none !important;
+			left: 0 !important;
+			margin-bottom: 20px;
+			right: 0 !important;
+			top: auto;
+			width: @width1;
+			&:before {
+				border-bottom: 0 solid @color0 !important;
+				border-left: 16px solid transparent !important;
+				border-right: 16px solid transparent !important;
+				border-top: 16px solid @color0 !important;
+				bottom: -16px;
+				left: 28px !important;
+				right: auto;
+				top: auto;
+			}
+		}
+		&:before {
+			display: none;
+		}
+		&:after {
+			display: none;
+		}
+		.timeline-badge {
+			bottom: 0px;
+			left: 43px;
+			top: auto;
+		}
+	}
+}
 }
 
 /* TinyMCE Editor
