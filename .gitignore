@@ -1,5 +1,2 @@
 *.codekit
 .DS_Store
-css/bootstrap-master
-fonts/*awesome*
-js/*moo*

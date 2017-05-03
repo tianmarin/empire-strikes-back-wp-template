@@ -26,7 +26,7 @@ get_header();
 	<div class="container">
 		<h1>¡Bienvenido!</h1>
 		<p>La intranet de <strong><?php echo bloginfo( 'name' ) ?></strong> ha sido redise&ntilde;ada para una mejor experiencia.</p>
-		<p><a class="btn btn-danger btn-lg" href="#" role="button">Aprende m&aacute;s</a></p>
+		<p><a class="btn btn-danger btn-lg" href="http://intranetmx.noviscorp.com/novis/csi/documentation-mgmt/intranet/theme-2017/" role="button">Aprende m&aacute;s</a></p>
 	</div>
 </div>
 <article id="inicio" class="container">
