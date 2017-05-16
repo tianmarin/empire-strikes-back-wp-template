@@ -26,7 +26,7 @@ get_header();
 	<div class="container">
 		<h1>¡Bienvenido!</h1>
 		<p>La intranet de <strong><?php echo bloginfo( 'name' ) ?></strong> ha sido redise&ntilde;ada para una mejor experiencia.</p>
-		<p><a class="btn btn-danger btn-lg" href="<? echo get_theme_mod('front_page_learn_more_link', home_url()); ?>" role="button">Aprende m&aacute;s</a></p>
+		<p><a class="btn btn-danger btn-lg" href="<?php echo get_theme_mod('front_page_learn_more_link', home_url()); ?>" role="button">Aprende m&aacute;s</a></p>
 	</div>
 </div>
 <article id="inicio" class="container">
