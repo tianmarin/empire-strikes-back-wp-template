@@ -11,7 +11,7 @@ get_header();
 <?php
 	if(has_post_thumbnail($post->ID)){
 		$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );
-		$jumbotron_style='background: url('.$thumb['0'].') no-repeat center center fixed; 
+		$jumbotron_style='background: url('.$thumb['0'].') no-repeat center center fixed;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -20,13 +20,13 @@ get_header();
 	}else{
 		$jumbotron_style='';
 	}
-	
+
 ?>
 <div class="jumbotron" style="<?php echo $jumbotron_style;?>">
 	<div class="container">
 		<h1>¡Bienvenido!</h1>
 		<p>La intranet de <strong><?php echo bloginfo( 'name' ) ?></strong> ha sido redise&ntilde;ada para una mejor experiencia.</p>
-		<p><a class="btn btn-danger btn-lg" href="http://intranetmx.noviscorp.com/novis/csi/documentation-mgmt/intranet/theme-2017/" role="button">Aprende m&aacute;s</a></p>
+		<p><a class="btn btn-danger btn-lg" href="<? echo get_theme_mod('front_page_learn_more_link', home_url()); ?>" role="button">Aprende m&aacute;s</a></p>
 	</div>
 </div>
 <article id="inicio" class="container">
@@ -48,7 +48,7 @@ get_header();
 		'offset'		=> 0,
 		'post_type'		=> 'page',
 		'post_status'	=> 'publish'
-		); 
+		);
 		$pages = get_pages($args);
 		foreach($pages as $page):
 			$output .='<section class="row row-eq-height">';
@@ -72,11 +72,11 @@ get_header();
 				'offset'		=> 0,
 				'post_type'		=> 'page',
 				'post_status'	=> 'publish'
-				); 
+				);
 				$subpages = get_pages($subargs);
-				
+
 				foreach($subpages as $subpage):
-				
+
 					$output .='<div class="col-sm-6 col-md-4">';
 						$output .='<div class="thumbnail">';
 							if(has_post_thumbnail($subpage->ID)){
@@ -84,7 +84,7 @@ get_header();
 								$output .= '<a href="'.get_page_link($subpage->ID).'" >';
 									$output .='<img src="'.$thumb['0'].'" alt="'.$subpage->post_title.'">';
 								$output .= '</a>';
-								
+
 							}
 							$output .='<div class="caption">';
 								$output .='<h3>'.$subpage->post_title.'</h3>';
