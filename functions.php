@@ -18,12 +18,12 @@ set_user_setting( 'dfw_width', 1200 );
 
 //http://codex.wordpress.org/Function_Reference/remove_menu_page
 function remove_menus(){
-//	remove_menu_page( 'upload.php' );                 //Media  
-    remove_menu_page('edit.php');                     //Posts  
+//	remove_menu_page( 'upload.php' );                 //Media
+    remove_menu_page('edit.php');                     //Posts
 }
 add_action( 'admin_menu', 'remove_menus' );
 /*
-* 
+*
 * ------------------------------------------------------------------------------------------------------
 */
 function get_page_parents_list($post=''){
@@ -41,7 +41,7 @@ function get_page_parents_list($post=''){
 			$output .= wp_list_pages("title_li=&echo=0&include=".$page);
 		}
 		$output = str_replace("current_page_item", "current_page_item active", $output);
-		//use include to list only the collected pages. 
+		//use include to list only the collected pages.
 //		$output = wp_list_pages("title_li=&echo=0&include=".$relations_string);
 	}
 	if (isset($output)) {
@@ -110,23 +110,23 @@ function the_excerpt_max_charlength($charlength) {
 
 
 /**
- * WordPress register with email only, make it possible to register with email 
+ * WordPress register with email only, make it possible to register with email
  * as username in a multisite installation
  * @param  Array $result Result array of the wpmu_validate_user_signup-function
  * @return Array         Altered result array
  */
 function custom_register_with_email($result) {
- 
+
    if ( $result['user_name'] != '' ) {
- 
+
       unset( $result['errors']->errors['user_name'] );
       unset( $result['errors']);
- 
+
    }
    return $result;
 }
 add_filter('wpmu_validate_user_signup','custom_register_with_email');
- 
+
 /**
 * Login Template
 * http://premium.wpmudev.org/blog/create-a-custom-wordpress-login-page/
@@ -157,10 +157,10 @@ function esb_subpages_shortcode_button_init() {
 	//Abort early if the user will never see TinyMCE
 	if ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') && get_user_option('rich_editing') == 'true')
 	return;
-	
-	//Add a callback to regiser our tinymce plugin   
-	add_filter("mce_external_plugins", "esb_subpages_register_tinymce_plugin"); 
-	
+
+	//Add a callback to regiser our tinymce plugin
+	add_filter("mce_external_plugins", "esb_subpages_register_tinymce_plugin");
+
 	// Add a callback to add our button to the TinyMCE toolbar
 	add_filter('mce_buttons', 'esb_subpages_add_tinymce_button');
 }
@@ -208,9 +208,9 @@ function esb_subpages_shortcode($atts){
 		'offset'		=> 0,
 		'post_type'		=> 'page',
 		'post_status'	=> 'publish'
-		); 
+		);
 		$subpages = get_pages($subargs);
-		
+
 		foreach($subpages as $subpage):
 			$output .='<a class="list-group-item" href="'.get_page_link($subpage->ID).'">';
 			$output .='<span class="h5 list-group-item-heading">'.$subpage->post_title.'</span>';
@@ -245,15 +245,28 @@ add_filter('mce_buttons_2', 'my_mce_buttons_2');
 function my_mce_before_init( $init_array ) {
 	$init_array['theme_advanced_buttons2_add'] = 'styleselect';
 	$init_array['theme_advanced_styles'] = 'Novis_123';
- 
+
 	return $init_array;
 }
 add_filter( 'tiny_mce_before_init', 'my_mce_before_init' );
 
 
+function tesb_customize_register( $wp_customize ) {
+	//All our sections, settings, and controls will be added here
+	$wp_customize->add_setting( 'front_page_learn_more_link' , array(
+		'default'   => home_url(),
+		'transport' => 'postMessage',
+	) );
+	$wp_customize->add_control( 'front_page_learn_more_link', array(
+		'label'			=> __( 'Link de P&aacute;gina inicial', 'tesb' ),
+		'type'			=> 'text',
+		'description'	=> 'Define the Learn More Link at the HomePage Template',
+		'section'		=> 'static_front_page',
+		'settings'		=> 'front_page_learn_more_link',
+	) );
 
 
-
-
+}
+add_action( 'customize_register', 'tesb_customize_register' );
 
 ?>
